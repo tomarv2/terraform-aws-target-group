@@ -1,5 +1,5 @@
 terraform {
-  required_version            = ">= 0.12"
+  required_version            = ">= 0.14"
   required_providers {
     aws = {
       version                     = "~> 2.61"
@@ -13,8 +13,7 @@ provider "aws" {
 }
 
 module "global" {
-  source                      = "git::git@github.com:tomarv2/terraform-aws-cloudwatch.git"
-//  source                     = "./../../../../_base_module/aws"
+    source                    = "git::git@github.com:tomarv2/terraform-global.git"
 }
 
 locals {
