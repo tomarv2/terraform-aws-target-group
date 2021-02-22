@@ -1,84 +1,97 @@
+[![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 # terraform-aws-target-group
 Terraform module for Target Group
 
-## Requirements
+## Versions
 
-| Name | Version |
-|------|---------|
-| terraform | >= 0.12 |
-| aws | ~> 2.61 |
+- Module tested for Terraform 0.14.
+- AWS provider version [3.29.0](https://registry.terraform.io/providers/hashicorp/aws/latest)
+- `main` branch: Provider versions not pinned to keep up with Terraform releases
+- `tags` releases: Tags are pinned with versions (use tag latest tag in your releases)
 
-## Providers
+**NOTE:** 
 
-| Name | Version |
-|------|---------|
-| aws | ~> 2.61 |
-| template | n/a |
+- Read more on [tfremote](https://github.com/tomarv2/tfremote)
+
+## Usage
+
+Recommended method:
+
+- Create python 3.6+ virtual environment 
+```
+python3 -m venv <venv name>
+```
+
+- Install package:
+```
+pip install tfremote
+```
+
+- Set below environment variables:
+```
+export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_PROFILE=default
+export TF_AWS_BUCKET_REGION=us-west-2
+export PATH=$PATH:/usr/local/bin/
+```  
+
+- Update:
+```
+example/custom/sample.tfvars
+```
+
+- Change to: 
+```
+example/base
+``` 
+
+- Run and verify the output before deploying:
+```
+tf -cloud aws plan -var-file <path to .tfvars file>
+```
+
+- Run below to deploy:
+```
+tf -cloud aws apply -var-file <path to .tfvars file>
+```
+
+- Run below to destroy:
+```
+tf -cloud aws destroy -var-file <path to .tfvars file>
+```
+
+Please refer to example directory [link](example/README.md) for references.
+
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| account\_id | n/a | `any` | n/a | yes |
+| account\_id | (Required) AWS account id (used to pull values from shared base module like vpc info, subnet ids) | `any` | n/a | yes |
 | alb\_action\_type | n/a | `string` | `"forward"` | no |
-| alb\_is\_public | n/a | `string` | `"false"` | no |
-| alb\_listener\_port | n/a | `string` | `"80"` | no |
-| alb\_listener\_protocol | n/a | `string` | `"HTTP"` | no |
-| alb\_target\_group\_port | n/a | `string` | `"80"` | no |
-| alb\_target\_group\_protocol | n/a | `string` | `"HTTP"` | no |
-| alb\_type | n/a | `string` | `"application"` | no |
-| asg\_cooldown | time between a scaling activity and the succeeding scaling activity | `string` | `"300"` | no |
-| asg\_desired | The desired number of instances for the autoscaling group | `number` | `1` | no |
-| asg\_health\_check\_type | Can be EC2 or ELB | `string` | `"EC2"` | no |
-| asg\_health\_grace\_period | How long to wait for instance to come up and start doing health checks | `number` | `600` | no |
-| asg\_max | The maximum number of instances for the autoscaling group | `number` | `1` | no |
-| asg\_min | The minimum number of instances for the autoscaling group | `number` | `1` | no |
-| assoicate\_public\_ip | n/a | `string` | `"true"` | no |
-| aws\_region | The AWS region to create things in. | `string` | `"us-east-2"` | no |
-| az\_count | Number of AZs to cover in a given AWS region | `string` | `"2"` | no |
-| create\_before\_destroy | n/a | `bool` | `true` | no |
-| deployment\_maximum\_percent | n/a | `string` | `"100"` | no |
-| deployment\_minimum\_healthy\_percent | n/a | `string` | `"0"` | no |
-| ebs\_vol\_name | name of ebs volume | `string` | `"/dev/xvdh"` | no |
-| ebs\_vol\_size | size of ebs volume | `string` | `"100"` | no |
-| ebs\_vol\_type | type of ebs volume | `string` | `"gp2"` | no |
-| efs\_to\_mount | n/a | `string` | `""` | no |
-| email | Team email, not individual email. Cannot be changed after running 'tf apply'. | `any` | n/a | yes |
-| enable\_monitoring | n/a | `string` | `"false"` | no |
-| force\_delete | n/a | `string` | `"true"` | no |
-| healthcheck\_interval | n/a | `string` | `"120"` | no |
-| healthcheck\_matcher | n/a | `string` | `"200"` | no |
-| healthcheck\_path | n/a | `string` | `"/healthcheck"` | no |
-| healthcheck\_port | n/a | `string` | `"80"` | no |
-| healthcheck\_retries | n/a | `number` | `2` | no |
-| healthcheck\_start\_period | n/a | `number` | `120` | no |
-| healthcheck\_timeout | n/a | `string` | `"30"` | no |
-| healthy\_threshold | n/a | `string` | `"2"` | no |
-| iam\_instance\_profile\_to\_use | IAM role to be used by instance | `any` | n/a | yes |
-| inst\_type | The AWS instance type | `string` | `"t2.medium"` | no |
-| key\_name | The SSH key name | `any` | n/a | yes |
-| os\_release | The AMI OS release. | `string` | `"test_ops_latest"` | no |
-| os\_version | The AMI OS version. | `string` | `"Centos7X86_64"` | no |
-| prjid | Name of the project/stack.  EG: mystack | `any` | n/a | yes |
+| alb\_cert\_arn | alb cert arn | `string` | `""` | no |
+| alb\_ssl\_policy | alb ssl policy | `string` | `""` | no |
+| aws\_region | The AWS region to create resources | `string` | `"us-west-2"` | no |
+| deregistration\_delay | n/a | `string` | `"300"` | no |
+| email | email address to be used for tagging (suggestion: use group email address) | `any` | n/a | yes |
+| healthcheck\_interval | n/a | `string` | `""` | no |
+| healthcheck\_matcher | healthcheck matcher (e.g. 200) | `string` | `""` | no |
+| healthcheck\_path | target group healthcheck path | `string` | `""` | no |
+| healthcheck\_timeout | n/a | `string` | `""` | no |
+| healthy\_threshold | target group healthcheck threshold | `string` | `""` | no |
+| lb\_port | n/a | `list` | <pre>[<br>  80<br>]</pre> | no |
+| lb\_protocol | n/a | `string` | `"HTTP"` | no |
+| prjid | (Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `any` | n/a | yes |
 | profile\_to\_use | Getting values from ~/.aws/credentials | `any` | n/a | yes |
-| root\_volume\_size | In gigabytes, must be at least 8 | `number` | `30` | no |
-| root\_volume\_type | Can be standard or gp2 | `string` | `"gp2"` | no |
-| security\_groups\_to\_use | Security groups to use | `any` | n/a | yes |
-| service\_ports | n/a | `any` | n/a | yes |
-| spot-instance-price | Set to blank to use on-demand pricing | `string` | `""` | no |
-| teamid | Name of the team or group e.g. devops, dataengineering. Should not be changed after running 'tf apply'. | `any` | n/a | yes |
-| unhealthy\_threshold | n/a | `string` | `"2"` | no |
-| user\_data | n/a | `any` | n/a | yes |
+| stickiness | Target group sticky configuration | <pre>object({<br>    cookie_duration = number<br>    enabled         = bool<br>  })</pre> | `null` | no |
+| target\_type | n/a | `string` | `"instance"` | no |
+| teamid | (Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `any` | n/a | yes |
+| unhealthy\_threshold | target group unheathy healthcheck threshold | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| alb\_listener | n/a |
-| alb\_target\_group\_id | n/a |
-| alb\_zoneid | n/a |
-| autoscaling\_group\_name | The name of the autoscaling group. |
-| key\_used | The key used to create the resources. |
-| launch\_configuration\_name | The name of the launch configuration. |
-| security\_group\_id | The ID of the default security group associated. |
+| target\_group\_arn | n/a |
 
