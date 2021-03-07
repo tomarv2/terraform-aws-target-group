@@ -25,11 +25,11 @@ variable "account_id" {
 
 variable "healthcheck_path" {
   description = "target group healthcheck path"
-  default = ""
+  default     = ""
 }
 
 variable "lb_port" {
-  default  = [80]
+  default = [80]
 }
 
 variable "healthy_threshold" {
@@ -43,20 +43,20 @@ variable "unhealthy_threshold" {
 }
 
 variable "healthcheck_timeout" {
-  default     = ""
+  default = ""
 }
 
 variable "healthcheck_interval" {
-  default     = ""
+  default = ""
 }
 
 variable "healthcheck_matcher" {
   description = "healthcheck matcher (e.g. 200)"
-  default = ""
+  default     = ""
 }
 
 variable "lb_protocol" {
-  default     = "HTTP"
+  default = "HTTP"
 }
 
 variable "alb_cert_arn" {
@@ -70,7 +70,7 @@ variable "alb_ssl_policy" {
 }
 
 variable "alb_action_type" {
-  default     = "forward"
+  default = "forward"
 }
 
 variable "stickiness" {

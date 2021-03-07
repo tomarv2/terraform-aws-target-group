@@ -3,15 +3,15 @@
 resource "aws_lb_target_group" "target_group" {
   count = length(var.lb_port)
 
-  name                                      = "${var.teamid}-${var.prjid}-${var.lb_port[count.index]}"
-  port                                      = element(var.lb_port, count.index)
-  protocol                                  = var.lb_protocol
+  name     = "${var.teamid}-${var.prjid}-${var.lb_port[count.index]}"
+  port     = element(var.lb_port, count.index)
+  protocol = var.lb_protocol
 
-  vpc_id                                    = module.global.vpc[var.account_id][var.aws_region]
-  tags                                      = merge(local.shared_tags)
+  vpc_id = module.global.vpc[var.account_id][var.aws_region]
+  tags   = merge(local.shared_tags)
 
-  deregistration_delay                      = var.deregistration_delay
-  target_type                               = var.target_type
+  deregistration_delay = var.deregistration_delay
+  target_type          = var.target_type
 
   health_check {
     interval            = var.healthcheck_interval == "" ? null : var.healthcheck_interval
