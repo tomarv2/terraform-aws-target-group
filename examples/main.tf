@@ -1,7 +1,6 @@
 module "target_group" {
   source = "../"
 
-  email                = "demo@demo.com"
   account_id           = "12345679012"
   lb_protocol          = "HTTP"
   lb_port              = [80]
