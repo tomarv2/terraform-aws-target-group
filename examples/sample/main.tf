@@ -1,5 +1,10 @@
+provider "aws" {
+  region  = "us-west-2"
+  profile = "default"
+}
+
 module "target_group" {
-  source = "../"
+  source = "../../"
 
   account_id           = "12345679012"
   lb_protocol          = "HTTP"
