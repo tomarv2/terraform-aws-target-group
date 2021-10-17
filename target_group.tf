@@ -1,7 +1,8 @@
 # target group
 # https://github.com/cloudposse/terraform-aws-alb-ingress/issues/24
 resource "aws_lb_target_group" "target_group" {
-  count = length(var.lb_port)
+  count = var.deploy_target_group != false ? length(var.lb_port) : 0
+
 
   name     = "${var.teamid}-${var.prjid}-${var.lb_port[count.index]}"
   port     = element(var.lb_port, count.index)

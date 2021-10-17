@@ -105,3 +105,9 @@ variable "target_type" {
   default     = "instance"
   type        = string
 }
+
+variable "deploy_target_group" {
+  description = "feature flag, true or false"
+  default     = true
+  type        = bool
+}
