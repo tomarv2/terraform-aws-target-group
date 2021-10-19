@@ -10,12 +10,11 @@ variable "prjid" {
 
 variable "aws_region" {
   description = "The AWS region to create resources"
-  default     = "us-west-2"
   type        = string
 }
 
 variable "account_id" {
-  description = "(Required) AWS account id (used to pull values from shared base module like vpc info, subnet ids)"
+  description = "AWS account id (used to pull values from shared base module like vpc info, subnet ids)"
   type        = string
 }
 
