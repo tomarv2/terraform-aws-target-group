@@ -8,7 +8,7 @@ resource "aws_lb_target_group" "target_group" {
   port     = element(var.lb_port, count.index)
   protocol = var.lb_protocol
 
-  vpc_id = module.global.vpc[local.account_info][local.override_aws_region]
+  vpc_id = module.global.vpc[local.account_id][local.region]
   tags   = merge(local.shared_tags)
 
   deregistration_delay = var.deregistration_delay

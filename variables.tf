@@ -1,20 +1,10 @@
 variable "teamid" {
-  description = "(Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  description = "Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
   type        = string
 }
 
 variable "prjid" {
-  description = "(Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "The AWS region to create resources"
-  type        = string
-}
-
-variable "account_id" {
-  description = "AWS account id (used to pull values from shared base module like vpc info, subnet ids)"
+  description = "Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
   type        = string
 }
 
