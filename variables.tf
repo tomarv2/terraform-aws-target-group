@@ -96,7 +96,7 @@ variable "target_type" {
 }
 
 variable "deploy_target_group" {
-  description = "feature flag, true or false"
+  description = "Feature flag, true or false"
   default     = true
   type        = bool
 }
