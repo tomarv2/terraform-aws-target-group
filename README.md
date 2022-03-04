@@ -123,7 +123,7 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.47.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.63 |
 
 ## Modules
 
@@ -143,7 +143,7 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_deploy_target_group"></a> [deploy\_target\_group](#input\_deploy\_target\_group) | feature flag, true or false | `bool` | `true` | no |
+| <a name="input_deploy_target_group"></a> [deploy\_target\_group](#input\_deploy\_target\_group) | Feature flag, true or false | `bool` | `true` | no |
 | <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | deregistration delay | `string` | `"300"` | no |
 | <a name="input_healthcheck_interval"></a> [healthcheck\_interval](#input\_healthcheck\_interval) | health check interval | `string` | `""` | no |
 | <a name="input_healthcheck_matcher"></a> [healthcheck\_matcher](#input\_healthcheck\_matcher) | healthcheck matcher (e.g. 200) | `string` | `""` | no |
