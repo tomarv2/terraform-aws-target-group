@@ -18,7 +18,7 @@
 ### Versions
 
 - Module tested for Terraform 1.0.1.
-- AWS provider version [3.74](https://registry.terraform.io/providers/hashicorp/aws/latest)
+- AWS provider version [4.35](https://registry.terraform.io/providers/hashicorp/aws/latest)
 - `main` branch: Provider versions not pinned to keep up with Terraform releases.
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-target-group/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-target-group" /></a> ).
@@ -114,13 +114,13 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.74 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.35 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.74 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.35 |
 
 ## Modules
 
@@ -140,24 +140,14 @@ Please refer to examples directory [link](examples) for references.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_deploy_target_group"></a> [deploy\_target\_group](#input\_deploy\_target\_group) | Feature flag, true or false | `bool` | `true` | no |
-| <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | deregistration delay | `string` | `"300"` | no |
-| <a name="input_healthcheck_interval"></a> [healthcheck\_interval](#input\_healthcheck\_interval) | health check interval | `string` | `""` | no |
-| <a name="input_healthcheck_matcher"></a> [healthcheck\_matcher](#input\_healthcheck\_matcher) | healthcheck matcher (e.g. 200) | `string` | `""` | no |
-| <a name="input_healthcheck_path"></a> [healthcheck\_path](#input\_healthcheck\_path) | target group health check path | `string` | `""` | no |
-| <a name="input_healthcheck_timeout"></a> [healthcheck\_timeout](#input\_healthcheck\_timeout) | health check timeout | `string` | `""` | no |
-| <a name="input_healthy_threshold"></a> [healthy\_threshold](#input\_healthy\_threshold) | target group health check threshold | `string` | `""` | no |
-| <a name="input_lb_port"></a> [lb\_port](#input\_lb\_port) | load balancer port | `list(any)` | <pre>[<br>  80<br>]</pre> | no |
-| <a name="input_lb_protocol"></a> [lb\_protocol](#input\_lb\_protocol) | load balancer protocol | `string` | `"HTTP"` | no |
-| <a name="input_prjid"></a> [prjid](#input\_prjid) | Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply' | `string` | n/a | yes |
-| <a name="input_stickiness"></a> [stickiness](#input\_stickiness) | Target group sticky configuration | <pre>object({<br>    cookie_duration = number<br>    enabled         = bool<br>  })</pre> | `null` | no |
-| <a name="input_target_type"></a> [target\_type](#input\_target\_type) | target type | `string` | `"instance"` | no |
-| <a name="input_teamid"></a> [teamid](#input\_teamid) | Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply' | `string` | n/a | yes |
-| <a name="input_unhealthy_threshold"></a> [unhealthy\_threshold](#input\_unhealthy\_threshold) | target group unhealthy health check threshold | `string` | `""` | no |
+| <a name="input_config"></a> [config](#input\_config) | Target groups configuration | `map(any)` | `{}` | no |
+| <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional tags to associate | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_target_group_arn"></a> [target\_group\_arn](#output\_target\_group\_arn) | Target group arn |
+| <a name="output_arn"></a> [arn](#output\_arn) | Target group ARN |
+| <a name="output_config"></a> [config](#output\_config) | Target group configuration |
+| <a name="output_port"></a> [port](#output\_port) | Target group port |
 <!-- END_TF_DOCS -->
